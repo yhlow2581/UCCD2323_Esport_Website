@@ -14,6 +14,14 @@
     rel="stylesheet">
   <style>
     /* ---------- MOTIVATION ---------- */
+    .card-grid {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+    }
 
     .motive-card {
       background: var(--card-bg);
@@ -128,31 +136,88 @@
       font-weight: 500;
     }
 
-    @media (max-width: 860px) {
-      .founder-card .photo-wrap {
-        width: min(200px, 70vw);
-        height: auto;
-        aspect-ratio: 200 / 266;
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 980px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
       }
 
       .motive-card {
         padding: 22px 20px 28px;
       }
+
+      .motive-card h3 {
+        font-size: 1.05rem;
+      }
+
+      .motive-card p {
+        font-size: 0.98rem;
+      }
+
+      .founder-card {
+        padding: 24px 20px 28px;
+      }
+
+      .founder-card .photo-wrap {
+        width: 180px;
+        height: 240px;
+      }
     }
 
     @media (max-width: 600px) {
-      .motive-card h3,
-      .founder-card h3 {
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .motive-card {
+        padding: 20px 18px 26px;
+      }
+
+      .motive-card h3 {
         font-size: 1rem;
       }
 
-      .motive-card p,
-      .founder-card .dev-list {
-        font-size: 0.9rem;
+      .motive-card p {
+        font-size: 0.95rem;
       }
 
       .founder-card {
         padding: 22px 18px 26px;
+      }
+
+      .founder-card .photo-wrap {
+        width: 160px;
+        height: 213px;
+      }
+
+      .founder-card h3 {
+        font-size: 1rem;
+      }
+
+      .founder-card .founder-id {
+        font-size: 0.95rem;
+      }
+
+      .founder-card .dev-list {
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .motive-card {
+        padding: 18px 15px 24px;
+      }
+
+      .founder-card {
+        padding: 20px 15px 24px;
+      }
+
+      .founder-card .photo-wrap {
+        width: 145px;
+        height: 193px;
       }
     }
   </style>
@@ -166,7 +231,7 @@
     <nav class="nav-links" id="navLinks">
       <a href="about_us.html">About Us</a>
       <a href="teamnroster.html">Teams &amp; Roster</a>
-      <a href="tournament.html">Events</a>
+      <a href="event.html">Events</a>
       <a href="news.html">News</a>
       <a href="store.html">Store</a>
       <a href="index.html#contact-us">Contact Us</a>
@@ -229,11 +294,12 @@
         <div class="dev-label">Page Developed:</div>
         <div class="dev-list">
           news.html<br>
-          news_detail.html<br>
+          news_awards.html<br>
+          news_announcement.html<br>
+          news_activities.html<br>
           store.html<br>
           store_product_details.html<br>
-          cart.html<br>
-          login.html
+          cart.html
         </div>
       </article>
       <article class="founder-card">
@@ -248,6 +314,7 @@
           club_event.html<br>
           event_details.html<br>
           event_registration.html<br>
+          login.html
         </div>
       </article>
     </div>
@@ -309,7 +376,7 @@
             </ul>
           </div>
           <div class="sitemap-col">
-            <h4><a href="tournament.html">Events</a></h4>
+            <h4><a href="event.html">Events</a></h4>
             <ul>
               <li>Tournaments</li>
               <li>Club Events</li>
@@ -326,6 +393,12 @@
           </div>
           <div class="sitemap-col">
             <h4><a href="store.html">Store</a></h4>
+            <ul>
+              <li>All</li>
+              <li>Apparel</li>
+              <li>Accessories</li>
+              <li>Gaming</li>
+            </ul>
           </div>
         </div>
       </div>
