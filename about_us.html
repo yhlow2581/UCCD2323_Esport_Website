@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | The Way To The Top</title>
+  <link rel="stylesheet" href="asset/css/format.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ---------- ABOUT US INTRO ---------- */
+    .about-intro {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .about-intro-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: clamp(25px, 5vw, 50px) clamp(16px, 5vw, 60px);
+      text-align: center;
+    }
+
+    .about-intro-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px rgba(62, 230, 255, 0.5);
+      margin-bottom: 26px;
+    }
+
+    .about-intro-card p {
+      font-family: var(--font-body);
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      font-weight: 500;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ---------- MAIN ACHIEVEMENT WALL ---------- */
+    .achieve-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .achieve-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px 24px 28px;
+      text-align: center;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .achieve-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(62, 230, 255, 0.7);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 22px rgba(62, 230, 255, 0.35), 0 0 46px rgba(255, 63, 240, 0.15);
+    }
+
+    .achieve-card .img-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      aspect-ratio: 16/10;
+      background: #0e0620;
+    }
+
+    .achieve-card .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .achieve-card .team-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .achieve-card .team-row h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px rgba(62, 230, 255, 0.5);
+    }
+
+    .achieve-card .result {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+      color: var(--neon-white);
+      text-shadow: 0 0 10px rgba(246, 241, 255, 0.4);
+    }
+
+    .achieve-card p.tournament {
+      font-family: var(--font-body);
+      color: var(--text-dim);
+      font-size: 1rem;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    @media (max-width: 860px) {
+      .achieve-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .about-intro-card {
+        padding: 40px 35px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .achieve-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .about-intro-card {
+        padding: 30px 20px;
+      }
+
+      .about-intro-card p {
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .achieve-card {
+        padding: 18px 18px 24px;
+      }
+
+      .achieve-card .result {
+        font-size: 1.4rem;
+      }
+
+      .achieve-card .team-row h3 {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .about-intro-card {
+        padding: 25px 16px;
+      }
+
+      .achieve-card {
+        padding: 16px 14px 22px;
+      }
+
+      .achieve-card .team-row {
+        gap: 6px;
+      }
+
+      .achieve-card .result {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar">
+    <a href="index.html" class="nav-logo"><img src="asset/media/deco/logo.png" alt="Club logo"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="about_us.html">About Us</a>
+      <a href="teamnroster.html">Teams &amp; Roster</a>
+      <a href="tournament.html">Events</a>
+      <a href="news.html">News</a>
+      <a href="store.html">Store</a>
+      <a href="index.html#contact-us">Contact Us</a>
+      <a href="login.html" id="loginLink">Log In</a>
+    </nav>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-icon">🛒</a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>The Way To The Top</h1>
+  </section>
+
+  <!-- ================= ABOUT US ================= -->
+  <section id="about-us">
+    <h2 class="section-title reveal">About Us</h2>
+    <div class="about-intro reveal">
+      <div class="about-intro-card">
+        <h3>The Way to the Top</h3>
+        <p>
+          From obscure origins to national champions, Vulpes proves that passion is our ultimate superpower.
+          Yesterday's trophies are merely tomorrow's starting line. The way to the top never stops. Join us,
+          and let's write the next chapter together!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN ACHIEVEMENT WALL ================= -->
+  <section id="achievement-wall">
+    <h2 class="section-title reveal">Main Achievement Wall</h2>
+    <div class="achieve-grid reveal">
+
+      <article class="achieve-card">
+        <div class="img-wrap"><img src="asset/media/aboutus/mainachwall_2.jpg" alt="Apex Mission"></div>
+        <div class="team-row">
+          <h3>Apex Mission</h3>
+        </div>
+        <div class="result">2nd Runner Up</div>
+        <p class="tournament">Malaysia National Esports Championship - LOL</p>
+      </article>
+      <article class="achieve-card">
+        <div class="img-wrap"><img src="asset/media/aboutus/mainachwall_1.jpg" alt="Valor Vipers"></div>
+        <div class="team-row">
+          <h3>Valor Vipers</h3>
+        </div>
+        <div class="result">Champion</div>
+        <p class="tournament">Malaysia National Esports Championship - Valorant</p>
+      </article>
+      <article class="achieve-card">
+        <div class="img-wrap"><img src="asset/media/aboutus/mainachwall_3.jpg" alt="Eastern Dawn"></div>
+        <div class="team-row">
+          <h3>Eastern Dawn</h3>
+        </div>
+        <div class="result">2nd Runner Up</div>
+        <p class="tournament">Malaysia National Esports Championship - HOK</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= OUR SPONSORS ================= -->
+  <section id="sponsors">
+    <h2 class="sponsors-title reveal">Our Sponsors</h2>
+    <div class="sponsors-row reveal">
+      <span>Nexus Tech Solutions</span>
+      <span>AeroStride Athletics</span>
+      <span>NovaGlow Cosmetics</span>
+      <span>Vertex Financial Group</span>
+      <span>PureNature Organics</span>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT US / NAVIGATOR ================= -->
+  <section class="cn-section" id="contact-us">
+    <div class="cn-grid reveal">
+
+      <div>
+        <div class="pill-btn">
+          <img src="../asset/media/deco/contactus.png" alt="">
+        </div>
+        <div class="social-row">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/ig_icon.png" alt="Instagram">
+          </a>
+          <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/discord_icon.png" alt="Discord">
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/x_icon.png" alt="X">
+          </a>
+          <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/email_icon.png" alt="Email">
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="pill-btn">
+          <img src="../asset/media/deco/navigator.png" alt="">
+        </div>
+        <div class="sitemap-cols">
+          <div class="sitemap-col">
+            <h4><a href="about_us.html">About Us</a></h4>
+            <ul>
+              <li>About Us</li>
+              <li>Main Achievement Wall</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="teamnroster.html">Teams &amp; Roster</a></h4>
+            <ul>
+              <li>Teams</li>
+              <li>Rankings</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="tournament.html">Events</a></h4>
+            <ul>
+              <li>Tournaments</li>
+              <li>Club Events</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="news.html">News</a></h4>
+            <ul>
+              <li>All</li>
+              <li>Awards</li>
+              <li>Announcements</li>
+              <li>Activities</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="store.html">Store</a></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BRICK STRIP + COPYRIGHT ================= -->
+  <div class="brick-strip"></div>
+  <footer class="copyright-bar">
+    &copy; 2026 Copyright. All rights reserved.
+  </footer>
+
+  <script src="asset/js/format.js"></script>
+
+</body>
+
+</html>

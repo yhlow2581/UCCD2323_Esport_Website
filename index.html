@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page | The Way To The Top</title>
+  <link rel="stylesheet" href="asset/css/format.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ---------- MOTIVATION ---------- */
+
+    .motive-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 26px 26px 32px;
+      text-align: center;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .motive-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(62, 230, 255, 0.7);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 22px rgba(62, 230, 255, 0.35), 0 0 46px rgba(255, 63, 240, 0.15);
+    }
+
+    .motive-card .img-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      aspect-ratio: 16/11;
+      background: #0e0620;
+    }
+
+    .motive-card .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .motive-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px rgba(62, 230, 255, 0.5);
+      margin-bottom: 14px;
+      line-height: 1.8;
+    }
+
+    .motive-card p {
+      font-family: var(--font-body);
+      color: var(--text-dim);
+      font-size: 1.02rem;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* ---------- FOUNDERS ---------- */
+    .founder-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 28px 24px 30px;
+      text-align: center;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .founder-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255, 63, 240, 0.65);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 22px rgba(255, 63, 240, 0.35), 0 0 46px rgba(62, 230, 255, 0.15);
+    }
+
+    .founder-card .photo-wrap {
+      width: 200px;
+      height: 266px;
+      margin: 0 auto 20px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .founder-card .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .founder-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px rgba(62, 230, 255, 0.5);
+      line-height: 1.4;
+      margin-bottom: 2px;
+    }
+
+    .founder-card .founder-id {
+      margin-top: 8px;
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px rgba(62, 230, 255, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .founder-card .dev-label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--neon-white);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .founder-card .dev-list {
+      font-family: var(--font-body);
+      color: var(--text-dim);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    @media (max-width: 860px) {
+      .founder-card .photo-wrap {
+        width: min(200px, 70vw);
+        height: auto;
+        aspect-ratio: 200 / 266;
+      }
+
+      .motive-card {
+        padding: 22px 20px 28px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .motive-card h3,
+      .founder-card h3 {
+        font-size: 1rem;
+      }
+
+      .motive-card p,
+      .founder-card .dev-list {
+        font-size: 0.9rem;
+      }
+
+      .founder-card {
+        padding: 22px 18px 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar">
+    <a href="index.html" class="nav-logo"><img src="asset/media/deco/logo.png" alt="Club logo"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="about_us.html">About Us</a>
+      <a href="teamnroster.html">Teams &amp; Roster</a>
+      <a href="tournament.html">Events</a>
+      <a href="news.html">News</a>
+      <a href="store.html">Store</a>
+      <a href="index.html#contact-us">Contact Us</a>
+      <a href="login.html" id="loginLink">Log In</a>
+    </nav>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-icon">🛒</a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>The Way To The Top</h1>
+  </section>
+
+  <!-- ================= OUR MOTIVATION ================= -->
+  <section id="motivation">
+    <h2 class="section-title reveal">Our Motivation</h2>
+    <div class="card-grid reveal">
+      <article class="motive-card">
+        <div class="img-wrap"><img src="asset/media/index/connectdc.gif" alt="Connect different cultures"></div>
+        <h3>Connect Different Cultures</h3>
+        <p>Crossing national borders and languages, uniting young people worldwide through a shared digital passion</p>
+      </article>
+      <article class="motive-card">
+        <div class="img-wrap"><img src="asset/media/index/fosteringteamwork.gif" alt="Fostering teamwork"></div>
+        <h3>Fostering Teamwork</h3>
+        <p>Teammates must trust each other and work closely together to win.</p>
+      </article>
+      <article class="motive-card">
+        <div class="img-wrap"><img src="asset/media/index/promotingtechi.gif" alt="Promoting tech innovation"></div>
+        <h3>Promoting Tech Innovation</h3>
+        <p>High-standard network, display, and AI technologies are tested and applied within esports scenarios.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= MEET OUR FOUNDERS ================= -->
+  <section id="founders">
+    <h2 class="section-title reveal">Meet Our Founders</h2>
+    <div class="card-grid reveal">
+      <article class="founder-card">
+        <div class="photo-wrap"><img src="asset/media/index/member1.png" alt="Low Yee Heng"></div>
+        <h3>Low Yee Heng</h3>
+        <span class="founder-id">2402067</span>
+        <div class="dev-label">Page Developed:</div>
+        <div class="dev-list">
+          index.html<br>
+          about_us.html<br>
+          teamnroster.html<br>
+          team_valorant.html<br>
+          team_lol.html<br>
+          team_hok.html
+        </div>
+      </article>
+      <article class="founder-card">
+        <div class="photo-wrap"><img src="asset/media/index/member2.png" alt="Tan Jie Yee"></div>
+        <h3>Tan Jie Yee</h3>
+        <span class="founder-id">2402966</span>
+        <div class="dev-label">Page Developed:</div>
+        <div class="dev-list">
+          news.html<br>
+          news_detail.html<br>
+          store.html<br>
+          store_product_details.html<br>
+          cart.html<br>
+          login.html
+        </div>
+      </article>
+      <article class="founder-card">
+        <div class="photo-wrap"><img src="asset/media/index/member3.png" alt="Lim Chan Tong"></div>
+        <h3>Lim Chan Tong</h3>
+        <span class="founder-id">2401944</span>
+        <div class="dev-label">Page Developed:</div>
+        <div class="dev-list">
+          tournament.html<br>
+          ticket_purchase.html<br>
+          ticket_confirmation.html<br>
+          club_event.html<br>
+          event_details.html<br>
+          event_registration.html<br>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= OUR SPONSORS ================= -->
+  <section id="sponsors">
+    <h2 class="sponsors-title reveal">Our Sponsors</h2>
+    <div class="sponsors-row reveal">
+      <span>Nexus Tech Solutions</span>
+      <span>AeroStride Athletics</span>
+      <span>NovaGlow Cosmetics</span>
+      <span>Vertex Financial Group</span>
+      <span>PureNature Organics</span>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT US / NAVIGATOR ================= -->
+  <section class="cn-section" id="contact-us">
+    <div class="cn-grid reveal">
+
+      <div>
+        <div class="pill-btn">
+          <img src="../asset/media/deco/contactus.png" alt="">
+        </div>
+        <div class="social-row">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/ig_icon.png" alt="Instagram">
+          </a>
+          <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/discord_icon.png" alt="Discord">
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/x_icon.png" alt="X">
+          </a>
+          <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer">
+            <img src="../asset/media/deco/email_icon.png" alt="Email">
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="pill-btn">
+          <img src="../asset/media/deco/navigator.png" alt="">
+        </div>
+        <div class="sitemap-cols">
+          <div class="sitemap-col">
+            <h4><a href="about_us.html">About Us</a></h4>
+            <ul>
+              <li>About Us</li>
+              <li>Main Achievement Wall</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="teamnroster.html">Teams &amp; Roster</a></h4>
+            <ul>
+              <li>Teams</li>
+              <li>Rankings</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="tournament.html">Events</a></h4>
+            <ul>
+              <li>Tournaments</li>
+              <li>Club Events</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="news.html">News</a></h4>
+            <ul>
+              <li>All</li>
+              <li>Awards</li>
+              <li>Announcements</li>
+              <li>Activities</li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h4><a href="store.html">Store</a></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BRICK STRIP + COPYRIGHT ================= -->
+  <div class="brick-strip"></div>
+  <footer class="copyright-bar">
+    &copy; 2026 Copyright. All rights reserved.
+  </footer>
+
+  <script src="asset/js/format.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams &amp; Roster | The Way To The Top</title>
+    <link rel="stylesheet" href="asset/css/format.css">
+    <link rel="stylesheet" href="asset/css/valo_lol_hok.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap">
+
+    <style>
+        /* ---------- TEAM CARDS ---------- */
+        .team-grid {
+            max-width: 1060px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .team-card {
+            position: relative;
+            display: block;
+            border-radius: 18px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: #2a075d;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+            transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .team-card .team-photo {
+            position: absolute;
+            inset: 0;
+        }
+
+        .team-card .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 4, 20, 0) 38%, rgba(10, 4, 20, .93) 100%);
+        }
+
+        .team-card .team-info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 18px;
+            z-index: 3;
+            text-align: center;
+            padding: 0 16px;
+        }
+
+        .team-card .team-info h3 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.25rem;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            color: #fdfcff;
+            text-shadow: 0 0 10px rgba(246, 241, 255, .35);
+            margin-bottom: 5px;
+        }
+
+        .team-card .team-roster {
+            font-size: .72rem;
+            letter-spacing: .02em;
+            color: rgba(255, 255, 255, .85);
+            font-weight: 600;
+        }
+
+        .team-card.accent-gold:hover {
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .45), 0 0 26px rgba(201, 154, 53, .5);
+            border-color: rgba(201, 154, 53, .7);
+        }
+
+        .team-card.accent-cyan:hover {
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .45), 0 0 26px rgba(62, 230, 255, .5);
+            border-color: rgba(62, 230, 255, .7);
+        }
+
+        .team-card.accent-orange:hover {
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .45), 0 0 26px rgba(201, 112, 47, .5);
+            border-color: rgba(201, 112, 47, .7);
+        }
+
+        /* ---------- TOURNAMENT RANKING TABLE ---------- */
+        .tournament-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 10px 6px;
+            background: rgba(20, 5, 58, .88);
+            border: 1px solid var(--card-border, rgba(62, 230, 255, .3));
+            border-radius: 18px;
+            overflow-x: auto;
+            box-shadow: 0 0 30px rgba(130, 44, 255, .18);
+        }
+
+        table.rank-table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+            font-family: var(--font-body);
+            font-size: .95rem;
+        }
+
+        table.rank-table thead th {
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            font-size: .82rem;
+            color: var(--neon-white, #f6f1ff);
+            text-align: left;
+            padding: 16px 14px;
+            background: #24105d;
+            border-bottom: 1px solid var(--card-border, rgba(62, 230, 255, .3));
+            white-space: nowrap;
+        }
+
+        .rank-table tbody tr {
+            transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+
+        table.rank-table tbody td {
+            padding: 13px 14px;
+            color: var(--text-dim, #c6b4ee);
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        table.rank-table tbody tr:nth-child(even) {
+            background: rgba(111, 99, 190, .42);
+        }
+
+        table.rank-table tbody tr.tier-row {
+            background: rgba(111, 99, 190, .48);
+        }
+
+        table.rank-table tbody tr:hover {
+            background: rgba(62, 230, 255, .08);
+            transform: none;
+        }
+
+        table.rank-table .rank-cell {
+            font-weight: 800;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .points-cell {
+            color: #fff;
+            font-weight: 900;
+        }
+
+        table.rank-table .team-mini-logo {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
+
+        /* ---------- EVALUATION RULES ---------- */
+        .eval-intro {
+            font-family: var(--font-body);
+            max-width: 920px;
+            margin: 0 auto 34px;
+            text-align: center;
+            color: #f6f1ff;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .eval-grid {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .eval-card {
+            background: rgba(20, 5, 58, .88);
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: 18px;
+            padding: 26px 24px;
+            box-shadow: 0 0 24px rgba(130, 44, 255, .15);
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+
+        .eval-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(62, 230, 255, .6);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, .4), 0 0 22px rgba(62, 230, 255, .3);
+        }
+
+        .eval-card h3 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .eval-card .eval-sub {
+            font-size: .85rem;
+            color: var(--text-dim-2, #b19bdc);
+            text-align: center;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .eval-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .84rem;
+        }
+
+        .eval-table th {
+            background: #25105f;
+            font-family: var(--font-display);
+            font-size: .68rem;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border, rgba(62, 230, 255, .3));
+        }
+
+        .eval-table td {
+            font-family: var(--font-body);
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            color: #f0eaff;
+            font-weight: 500;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+
+        /* ---------- SECTION SPACING ---------- */
+        #meet-our-teams {
+            padding-top: 28px;
+            padding-bottom: 36px;
+        }
+
+        #tournament-ranking {
+            padding-top: 28px;
+            padding-bottom: 56px;
+        }
+
+        #evaluation-rules {
+            padding-top: 22px;
+            padding-bottom: 56px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+
+        @media (max-width: 980px) {
+            .team-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                max-width: 900px;
+                gap: 24px;
+            }
+
+            .eval-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            #meet-our-teams,
+            #tournament-ranking,
+            #evaluation-rules {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 520px;
+                gap: 20px;
+            }
+
+            .team-card {
+                aspect-ratio: 16 / 10;
+            }
+
+            .section-title {
+                font-size: clamp(1.45rem, 7vw, 2rem);
+            }
+
+            .tournament-wrap {
+                padding: 8px 4px;
+                border-radius: 14px;
+            }
+
+            table.rank-table {
+                min-width: 860px;
+                font-size: .82rem;
+            }
+
+            table.rank-table thead th,
+            table.rank-table tbody td {
+                padding: 10px 9px;
+            }
+
+            .eval-card {
+                padding: 18px 12px;
+            }
+
+            .eval-table {
+                font-size: .74rem;
+            }
+
+            .eval-table th,
+            .eval-table td {
+                padding: 8px 7px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .team-grid {
+                gap: 16px;
+            }
+
+            .team-card .team-info {
+                bottom: 12px;
+                padding: 0 10px;
+            }
+
+            .team-card .team-info h3 {
+                font-size: 1rem;
+            }
+
+            .team-card .team-roster {
+                font-size: .65rem;
+            }
+
+            .eval-card {
+                padding: 16px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <a href="index.html" class="nav-logo"><img src="asset/media/deco/logo.png" alt="Club logo"></a>
+        <nav class="nav-links" id="navLinks">
+            <a href="about_us.html">About Us</a>
+            <a href="teamnroster.html">Teams &amp; Roster</a>
+            <a href="tournament.html">Events</a>
+            <a href="news.html">News</a>
+            <a href="store.html">Store</a>
+            <a href="index.html#contact-us">Contact Us</a>
+            <a href="login.html" id="loginLink">Log In</a>
+        </nav>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>The Way To The Top</h1>
+    </section>
+
+    <!-- ================= MEET OUR TEAMS ================= -->
+    <section id="meet-our-teams">
+        <h2 class="section-title reveal">Meet Our Teams</h2>
+        <div class="team-grid reveal">
+            <a class="team-card accent-gold" href="team_lol.html">
+                <div class="team-photo"><img src="asset/media/team_lol/group.png" alt="Apex Mission team photo">
+                </div>
+                <div class="team-info">
+                    <h3>Apex Mission</h3>
+                    <p class="team-roster">LAIFO &middot; TIA &middot; IAN &middot; VERONIC &middot; JSION</p>
+                </div>
+            </a>
+            <a class="team-card accent-cyan" href="team_valorant.html">
+                <div class="team-photo"><img src="asset/media/team_valorant/group.png" alt="Valor Vipers team photo">
+                </div>
+                <div class="team-info">
+                    <h3>Valor Vipers</h3>
+                    <p class="team-roster">22X &middot; ZACK &middot; JEREMY &middot; LEFT &middot; SU</p>
+                </div>
+            </a>
+            <a class="team-card accent-orange" href="team_hok.html">
+                <div class="team-photo"><img src="asset/media/team_hok/group.png" alt="Eastern Dawn team photo">
+                </div>
+                <div class="team-info">
+                    <h3>Eastern Dawn</h3>
+                    <p class="team-roster">FLAI &middot; SEBEN &middot; GLOWRI &middot; ANGE &middot; SISHEN</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= TOURNAMENT RANKING ================= -->
+    <section id="tournament-ranking">
+        <h2 class="section-title reveal">Tournament Ranking</h2>
+        <div class="tournament-wrap reveal">
+            <table class="tourney rank-table" id="rankingTable">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Position</th>
+                        <th>KDA</th>
+                        <th>&#127942; National</th>
+                        <th>&#129351; State</th>
+                        <th>&#11088; MVP</th>
+                        <th>&#127979; School</th>
+                        <th>Total Points</th>
+                    </tr>
+                </thead>
+                <tbody id="rankingBody">
+
+                    <tr class="tier-row">
+                        <td class="rank-cell">🥇 1</td>
+                        <td>22X</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/VALORANT_logo.png" alt="">Valor
+                            Vipers</td>
+                        <td>Duelist</td>
+                        <td>3.86</td>
+                        <td>12</td>
+                        <td>8</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td class="points-cell">29</td>
+                    </tr>
+                    <tr class="tier-row">
+                        <td class="rank-cell">🥈 2</td>
+                        <td>🛡️ Zack</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/VALORANT_logo.png" alt="">Valor
+                            Vipers</td>
+                        <td>Controller</td>
+                        <td>4.38</td>
+                        <td>12</td>
+                        <td>8</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="tier-row">
+                        <td class="rank-cell">🥉 3</td>
+                        <td>Su</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/VALORANT_logo.png" alt="">Valor
+                            Vipers</td>
+                        <td>Sentinel</td>
+                        <td>4.16</td>
+                        <td>12</td>
+                        <td>6</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td class="points-cell">25</td>
+                    </tr>
+                    <tr class="tier-row">
+                        <td class="rank-cell">🥉 3</td>
+                        <td>Jeremy</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/VALORANT_logo.png" alt="">Valor
+                            Vipers</td>
+                        <td>Duelist</td>
+                        <td>3.4</td>
+                        <td>12</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">25</td>
+                    </tr>
+                    <tr class="tier-row">
+                        <td class="rank-cell">🥉 3</td>
+                        <td>Left</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/VALORANT_logo.png" alt="">Valor
+                            Vipers</td>
+                        <td>Initiator</td>
+                        <td>4.32</td>
+                        <td>12</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">25</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Jsion</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/LOL_logo.png" alt="">Apex Mission
+                        </td>
+                        <td>ADC</td>
+                        <td>3.83</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td class="points-cell">22</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>🛡️ Ian</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/LOL_logo.png" alt="">Apex Mission
+                        </td>
+                        <td>Mid</td>
+                        <td>3.8</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">22</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Laifo</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/LOL_logo.png" alt="">Apex Mission
+                        </td>
+                        <td>Jungle</td>
+                        <td>3.96</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">22</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Veronic</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/LOL_logo.png" alt="">Apex Mission
+                        </td>
+                        <td>Flex</td>
+                        <td>3.78</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">22</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Tia</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/LOL_logo.png" alt="">Apex Mission
+                        </td>
+                        <td>Top</td>
+                        <td>3.12</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">22</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>🛡️ Glowri</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/HOK_logo.png" alt="">Eastern Dawn
+                        </td>
+                        <td>Jungle</td>
+                        <td>4.35</td>
+                        <td>9</td>
+                        <td>7</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td class="points-cell">21</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Ange</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/HOK_logo.png" alt="">Eastern Dawn
+                        </td>
+                        <td>Mid Lane</td>
+                        <td>4.59</td>
+                        <td>9</td>
+                        <td>7</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">21</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Sishen</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/HOK_logo.png" alt="">Eastern Dawn
+                        </td>
+                        <td>Clash Lane</td>
+                        <td>3.39</td>
+                        <td>9</td>
+                        <td>7</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">21</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Flai</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/HOK_logo.png" alt="">Eastern Dawn
+                        </td>
+                        <td>Support</td>
+                        <td>3.8</td>
+                        <td>9</td>
+                        <td>7</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">21</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">-</td>
+                        <td>Seben</td>
+                        <td><img class="team-mini-logo" src="asset/media/teamnroster/HOK_logo.png" alt="">Eastern Dawn
+                        </td>
+                        <td>Sentinel</td>
+                        <td>3.97</td>
+                        <td>9</td>
+                        <td>7</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td class="points-cell">21</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ================= EVALUATION RULES ================= -->
+    <section id="evaluation-rules">
+        <h2 class="section-title reveal">Evaluation Rules</h2>
+        <p class="eval-intro reveal">This document outlines the standard points allocation and calculation rules for
+            student competitions and tournament performance.</p>
+        <div class="eval-grid reveal">
+            <div class="eval-card">
+                <h3>Points Allocation Matrix</h3>
+                <p class="eval-sub">The table below defines the points awarded for various competition achievements
+                    and participation level.</p>
+                <table class="eval-table">
+                    <thead>
+                        <tr>
+                            <th>Criteria &amp; Achievement</th>
+                            <th>Scope / Context</th>
+                            <th>Points Awarded</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&#129351; Champion or Runner-up</td>
+                            <td>National Level Competitions</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>&#129352; Champion or Runner-up</td>
+                            <td>State / Provincial Level Competitions</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>&#10974;&#65039; Tournament MVP</td>
+                            <td>Individual Performance (Full Field)</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>&#129353; General Participation</td>
+                            <td>Any General Competitions (Excluding Top 2 Finish &amp; Intra-school competitions)</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>&#127941; Champion or Runner-up</td>
+                            <td>Intra-school / Campus Competitions</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>&#128221; Campus Participation</td>
+                            <td>General Intra-school Competitions</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="eval-card reveal">
+                <h3>Comprehensive Calculation &amp; Deduplication Rules</h3>
+                <p class="eval-sub">To ensure fair and accurate evaluation, all point scoring must adhere to the
+                    following logic guidelines.</p>
+                <table class="eval-table">
+                    <thead>
+                        <tr>
+                            <th>Principle</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>National Individual + Team Scoring</td>
+                            <td>At the national level, team achievements and individual MVP achievements are scored
+                                separately. Therefore, a player may receive both the team points for a National
+                                Champion/Runner-up result and an additional +2 points for receiving Tournament MVP in
+                                the same competition.</td>
+                        </tr>
+                        <tr>
+                            <td>State / Campus Single-Score Rule</td>
+                            <td>At the state or campus level, team and individual achievements from the same
+                                competition are not stacked. Only the higher or equal applicable score is counted.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MVP Priority Rule</td>
+                            <td>If a Tournament MVP award is equal to or higher than the applicable team achievement
+                                for the same State / Campus competition, only the MVP points are awarded.</td>
+                        </tr>
+                        <tr>
+                            <td>No Double Counting Within the Same Achievement</td>
+                            <td>The same specific achievement cannot be counted more than once. For example, a
+                                National Champion result gives +5 team points; it does not also receive the +2
+                                General Participation points for the same event.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= OUR SPONSORS ================= -->
+    <section id="sponsors">
+        <h2 class="sponsors-title reveal">Our Sponsors</h2>
+        <div class="sponsors-row reveal">
+            <span>Nexus Tech Solutions</span>
+            <span>AeroStride Athletics</span>
+            <span>NovaGlow Cosmetics</span>
+            <span>Vertex Financial Group</span>
+            <span>PureNature Organics</span>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT US / NAVIGATOR ================= -->
+    <section class="cn-section" id="contact-us">
+        <div class="cn-grid reveal">
+
+            <div>
+                <div class="pill-btn">
+                    <img src="../asset/media/deco/contactus.png" alt="">
+                </div>
+                <div class="social-row">
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../asset/media/deco/ig_icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../asset/media/deco/discord_icon.png" alt="Discord">
+                    </a>
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../asset/media/deco/x_icon.png" alt="X">
+                    </a>
+                    <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer">
+                        <img src="../asset/media/deco/email_icon.png" alt="Email">
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="pill-btn">
+                    <img src="../asset/media/deco/navigator.png" alt="">
+                </div>
+                <div class="sitemap-cols">
+                    <div class="sitemap-col">
+                        <h4><a href="about_us.html">About Us</a></h4>
+                        <ul>
+                            <li>About Us</li>
+                            <li>Main Achievement Wall</li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-col">
+                        <h4><a href="teamnroster.html">Teams &amp; Roster</a></h4>
+                        <ul>
+                            <li>Teams</li>
+                            <li>Rankings</li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-col">
+                        <h4><a href="tournament.html">Events</a></h4>
+                        <ul>
+                            <li>Tournaments</li>
+                            <li>Club Events</li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-col">
+                        <h4><a href="news.html">News</a></h4>
+                        <ul>
+                            <li>All</li>
+                            <li>Awards</li>
+                            <li>Announcements</li>
+                            <li>Activities</li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-col">
+                        <h4><a href="store.html">Store</a></h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= BRICK STRIP + COPYRIGHT ================= -->
+    <div class="brick-strip"></div>
+    <footer class="copyright-bar">
+        &copy; 2026 Copyright. All rights reserved.
+    </footer>
+
+    <script src="asset/js/format.js"></script>
+
+</body>
+
+</html>
